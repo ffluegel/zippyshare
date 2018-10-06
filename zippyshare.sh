@@ -42,7 +42,7 @@ function zippydownload()
 
     # Get cookie
     if [ -f "${cookiefile}" ]
-    then 
+    then
         jsessionid="$( cat "${cookiefile}" | grep "JSESSIONID" | cut -f7)"
     else
         echo "can't find cookie file for ${prefix}"
@@ -90,10 +90,20 @@ function zippydownload()
 
 if [ -f "${1}" ]
 then
-    for url in $( cat "${1}" | grep -i 'zippyshare.com' )
-    do
-        zippydownload "${url}"
-    done
+    if [[ ${1} == *".dlc"* ]];
+    then
+        decrypt-dlc ${1}
+        for url in $( cat urls.txt | grep -i 'zippyshare.com' )
+        do
+            zippydownload "${url}"
+        done
+        rm urls.txt
+    else
+        for url in $( cat "${1}" | grep -i 'zippyshare.com' )
+        do
+            zippydownload "${url}"
+        done
+    fi
 else
     url="${1}"
     zippydownload "${url}"

@@ -1,5 +1,13 @@
 ## zippyshare.sh
-### bash script for downloading zippyshare files
+### bash script for downloading zippyshare files it automatically decrypts .dlc files and downloads zippyshare links.
+
+### You need the node npm package **decrypt-dlc-cli** to use this script
+
+##### Install decrypt-dlc-cli
+**You need to install this package from the GitHub source**
+```bash
+npm install -g https://github.com/sydev/decrypt-dlc-cli.git
+```
 
 ##### Download single file from zippyshare
 
@@ -13,6 +21,12 @@
 ./zippyshare.sh url-list.txt
 ```
 
+##### Decrypt .dlc files and download the content (Only possible if the dlc file contains zippyshare links)
+
+```bash
+./zippyshare.sh container.dlc
+```
+
 ##### Example:
 
 ```bash
@@ -21,4 +35,4 @@
 
 zippyshare.sh uses `curl` with the `-C` flag, which skips over completed files and attempts to resume partially downloaded files.
 
-### Requirements: `coreutils`, `grep`, `sed`, **`curl`**
+### Requirements: **[`decrypt-dlc-cli`](https://github.com/sydev/decrypt-dlc-cli)** `coreutils`, `grep`, `sed`, **`curl`**
