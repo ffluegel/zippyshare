@@ -3,8 +3,8 @@
 
 ### You need the node npm package **decrypt-dlc-cli** to use this script
 
+
 ##### Install decrypt-dlc-cli
-##### You need to install this package from the GitHub source**
 
 ```bash
 npm install -g https://github.com/sydev/decrypt-dlc-cli.git
