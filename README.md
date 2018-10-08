@@ -1,5 +1,5 @@
 ## zippyshare.sh
-### bash script for downloading zippyshare files it automatically decrypts .dlc files and downloads zippyshare links.
+### bash script for downloading zippyshare files from .txt file or .dlc container. 
 
 ### You need the node npm package **decrypt-dlc-cli** to use this script
 
