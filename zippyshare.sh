@@ -6,6 +6,16 @@
 # @Date: 2018-08-15
 # @Usage: ./zippyshare.sh url
 
+declare OUTDIR
+if [ -d "${2}" ]
+then
+    OUTDIR=${2}
+    length=${#OUTDIR}
+    last_char=${OUTDIR:length-1:1}
+    [[ $last_char != "/" ]] && OUTDIR="$OUTDIR/"; :
+    echo File will be saved to $OUTDIR
+fi
+
 if [ -z "${1}" ]
 then
     echo "usage: ${0} url"
@@ -82,7 +92,7 @@ function zippydownload()
     echo "${filename}"
 
     # Start download file
-    curl -# -A "${agent}" -e "${ref}" -H "Cookie: JSESSIONID=${jsessionid}" -C - "${dl}" -o "${filename}"
+    curl -# -A "${agent}" -e "${ref}" -H "Cookie: JSESSIONID=${jsessionid}" -C - "${dl}" -o "${OUTDIR}${filename}"
 
     rm -f "${cookiefile}" 2> /dev/null
     rm -f "${infofile}" 2> /dev/null

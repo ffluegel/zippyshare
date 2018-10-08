@@ -19,7 +19,7 @@ npm install -g https://github.com/sydev/decrypt-dlc-cli.git
 ##### Batch-download files from URL list (url-list.txt must contain one zippyshare.com url per line)
 
 ```bash
-./zippyshare.sh url-list.txt
+./zippyshare.sh <zippyshare links as .txt or .dlc file> <output directory>
 ```
 
 ##### Decrypt .dlc files and download the content (Only possible if the dlc file contains zippyshare links)
