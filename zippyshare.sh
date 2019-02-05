@@ -2,8 +2,8 @@
 # @Description: zippyshare.com file download script
 # @Author: Live2x
 # @URL: https://github.com/ffluegel/zippyshare
-# @Version: 201901110001
-# @Date: 2019-01-11
+# @Version: 201902050001
+# @Date: 2019-02-05
 # @Usage: ./zippyshare.sh url
 
 declare OUTDIR
@@ -39,7 +39,7 @@ function zippydownload()
         rm -f "${cookiefile}" 2> /dev/null
         rm -f "${infofile}" 2> /dev/null
         curl -s -c "${cookiefile}" -o "${infofile}" -L "${url}"
-        filename="$( cat "${infofile}" | grep "/d/" | cut -d'/' -f6 | cut -d'"' -f1 | grep -o "[^ ]\+\(\+[^ ]\+\)*" )"
+        filename="$( cat "${infofile}" | grep "/d/" | cut -d'/' -f5 | cut -d'"' -f1 | grep -o "[^ ]\+\(\+[^ ]\+\)*" )"
     done
 
     if [ "${retry}" -ge 10 ]
@@ -62,10 +62,10 @@ function zippydownload()
     if [ -f "${infofile}" ]
     then
         # Get url algorithm
-        dlbutton="$( grep 'getElementById..dlbutton...href' "${infofile}" | grep -oE '[0-9]+%[0-9]+' | head -1)"
+        dlbutton="$(grep -oE 'var a = [0-9]+;' ${infofile} | grep -oE '[0-9]+')"
         if [ -n "${dlbutton}" ]
         then
-            algorithm="${dlbutton}+11"
+            algorithm="${dlbutton}**3+3"
         else
            echo "could not get zippyshare url algorithm"
            exit 1
@@ -87,7 +87,7 @@ function zippydownload()
     dl="https://${server}/d/${id}/${a}/${filename}"
 
     # Set browser agent
-    agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+    agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36"
 
     echo "${filename}"
 
